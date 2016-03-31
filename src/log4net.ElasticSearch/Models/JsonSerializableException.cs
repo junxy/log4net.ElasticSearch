@@ -9,7 +9,7 @@ namespace log4net.ElasticSearch.Models
     {
         public string Type { get; set;  }
         public string Message { get; set; }
-        public string HelpLink { get; set; }
+//        public string HelpLink { get; set; }
         public string Source { get; set; }
         public int HResult { get; set; }
         public string StackTrace { get; set; }
@@ -25,7 +25,7 @@ namespace log4net.ElasticSearch.Models
             {
                 Type = ex.GetType().FullName,
                 Message = ex.Message,
-                HelpLink = ex.HelpLink,
+//                HelpLink = ex.HelpLink,
                 Source = ex.Source,
 #if NET45
                 HResult = ex.HResult,

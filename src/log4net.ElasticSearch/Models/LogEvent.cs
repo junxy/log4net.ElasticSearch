@@ -15,14 +15,14 @@ namespace log4net.ElasticSearch.Models
     {
         public logEvent()
         {
-            properties = new Dictionary<string, string>();
+//            properties = new Dictionary<string, string>();
         }
 
         public string timeStamp { get; set; }
 
         public string message { get; set; }
 
-        public object messageObject { get; set; }
+//        public object messageObject { get; set; }
 
         public object exception { get; set; }
 
@@ -30,7 +30,7 @@ namespace log4net.ElasticSearch.Models
 
         public string domain { get; set; }
 
-        public string identity { get; set; }
+//        public string identity { get; set; }
 
         public string level { get; set; }
 
@@ -40,13 +40,13 @@ namespace log4net.ElasticSearch.Models
 
         public string lineNumber { get; set; }
 
-        public string fullInfo { get; set; }
+//        public string fullInfo { get; set; }
 
         public string methodName { get; set; }
 
         public string fix { get; set; }
 
-        public IDictionary<string, string> properties { get; set; }
+//        public IDictionary<string, string> properties { get; set; }
 
         public string userName { get; set; }
 
@@ -65,7 +65,7 @@ namespace log4net.ElasticSearch.Models
             {
                 loggerName = loggingEvent.LoggerName,
                 domain = loggingEvent.Domain,
-                identity = loggingEvent.Identity,
+//                identity = loggingEvent.Identity,
                 threadName = loggingEvent.ThreadName,
                 userName = loggingEvent.UserName,
                 timeStamp = loggingEvent.TimeStamp.ToUniversalTime().ToString("O"),
@@ -78,41 +78,42 @@ namespace log4net.ElasticSearch.Models
 
             // Added special handling of the MessageObject since it may be an exception. 
             // Exception Types require specialized serialization to prevent serialization exceptions.
-            if (loggingEvent.MessageObject != null && loggingEvent.MessageObject.GetType() != typeof(string))
-            {
-                if (loggingEvent.MessageObject is Exception)
-                {
-                    logEvent.messageObject = JsonSerializableException.Create((Exception)loggingEvent.MessageObject);
-                }
-                else
-                {
-                    logEvent.messageObject = loggingEvent.MessageObject;
-                }
-            }
-            else
-            {
-                logEvent.messageObject = new object();
-            }
+//            if (loggingEvent.MessageObject != null && loggingEvent.MessageObject.GetType() != typeof(string))
+//            {
+//                if (loggingEvent.MessageObject is Exception)
+//                {
+//                    logEvent.messageObject = JsonSerializableException.Create((Exception)loggingEvent.MessageObject);
+//                }
+//                else
+//                {
+//                    logEvent.messageObject = loggingEvent.MessageObject;
+//                }
+//            }
+//            else
+//            {
+//                logEvent.messageObject = new object();
+//            }
 
             if (loggingEvent.LocationInformation != null)
             {
                 logEvent.className = loggingEvent.LocationInformation.ClassName;
                 logEvent.fileName = loggingEvent.LocationInformation.FileName;
                 logEvent.lineNumber = loggingEvent.LocationInformation.LineNumber;
-                logEvent.fullInfo = loggingEvent.LocationInformation.FullInfo;
+//                logEvent.fullInfo = loggingEvent.LocationInformation.FullInfo;
                 logEvent.methodName = loggingEvent.LocationInformation.MethodName;
             }
 
-            AddProperties(loggingEvent, logEvent);
+            // skip
+//            AddProperties(loggingEvent, logEvent);
 
             return logEvent;
         }
 
-        static void AddProperties(LoggingEvent loggingEvent, logEvent logEvent)
-        {
-            loggingEvent.Properties().Union(AppenderPropertiesFor(loggingEvent)).
-                         Do(pair => logEvent.properties.Add(pair));
-        }
+//        static void AddProperties(LoggingEvent loggingEvent, logEvent logEvent)
+//        {
+//            loggingEvent.Properties().Union(AppenderPropertiesFor(loggingEvent)).
+//                         Do(pair => logEvent.properties.Add(pair));
+//        }
 
         static IEnumerable<KeyValuePair<string, string>> AppenderPropertiesFor(LoggingEvent loggingEvent)
         {

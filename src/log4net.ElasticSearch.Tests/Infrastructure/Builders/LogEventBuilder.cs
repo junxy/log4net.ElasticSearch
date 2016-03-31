@@ -52,12 +52,12 @@ namespace log4net.ElasticSearch.Tests.Infrastructure.Builders
             return new Models.logEvent
                 {
                     className = builder.className,
-                    domain = builder.domain,
+//                    domain = builder.domain,
                     exception = builder.exception,
                     fileName = builder.fileName,
                     fix = builder.fix,
-                    fullInfo = builder.fullInfo,
-                    identity = builder.identity,
+//                    fullInfo = builder.fullInfo,
+//                    identity = builder.identity,
                     level = builder.level,
                     lineNumber = builder.lineNumber,
                     timeStamp = builder.timeStamp.ToString(CultureInfo.InvariantCulture),
